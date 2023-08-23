@@ -17,13 +17,11 @@ const HomeScreen = props => {
   const [selact, setSelact] = useState([]);
   const [data, setData] = useState([]);
   const [searchData, setSearchData] = useState([]);
-  const [dataa, setDataa] = useState([]);
 
   useFocusEffect(
     React.useCallback(() => {
       loadSavedSelection();
       loadTasks();
-      setDataa(dataa);
     }, []),
   );
   const loadTasks = async () => {
@@ -77,14 +75,17 @@ const HomeScreen = props => {
 
         <FlatList
           style={styles.FlatList}
-          renderItem={({item}) => {
+          renderItem={({item, index}) => {
             return (
               <View style={styles.listView}>
                 <Text style={styles.timetext}>
                   {item.Date + '  '}
                   {item.Time}
                 </Text>
-                <Text style={styles.titleText}>{item.title}</Text>
+                <Text style={styles.titleText}>
+                  {index + 1 + '] '}
+                  {item.title}
+                </Text>
                 <Text style={styles.notetext}>{item.note}</Text>
                 <View style={styles.iconview}>
                   <TouchableOpacity
@@ -101,7 +102,7 @@ const HomeScreen = props => {
                       ]}
                       source={require('../image/check.png')}
                     />
-                    {selact.includes(item.id) ? <Text>Complet</Text> : ''}
+                    {selact.includes(item.id) ? <Text>Complet Task</Text> : ''}
                   </TouchableOpacity>
                   <TouchableOpacity onPress={() => removeTask(item.id)}>
                     <Image

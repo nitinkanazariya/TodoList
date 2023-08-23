@@ -22,10 +22,7 @@ const AddTaskScreen = props => {
   );
 
   const loadTasks = async () => {
-    const storedTasks = await AsyncStorage.getItem('tasks');
-    if (storedTasks !== null) {
-      setTasks(JSON.parse(storedTasks));
-    }
+    await AsyncStorage.getItem('tasks');
   };
   const SaveTask = async () => {
     const storedTasks = await AsyncStorage.getItem('tasks');

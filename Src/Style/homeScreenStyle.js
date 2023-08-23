@@ -34,7 +34,12 @@ export default styles = StyleSheet.create({
 
     backgroundColor: 'white',
   },
-  titleText: {color: 'black', fontWeight: 'bold', fontSize: 16},
+  titleText: {
+    color: 'black',
+    fontWeight: 'bold',
+    fontSize: 16,
+    marginLeft: -10,
+  },
   timetext: {color: 'gray', fontSize: 12, alignSelf: 'flex-end'},
   notetext: {color: 'gray', fontWeight: 'bold', fontSize: 14},
   removeicon: {
