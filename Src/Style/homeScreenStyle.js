@@ -7,8 +7,9 @@ export default styles = StyleSheet.create({
     fontSize: 18,
     textAlign: 'center',
     backgroundColor: 'black',
-    padding: 10,
-    paddingVertical: 20,
+    marginTop: 40,
+    marginBottom: 30,
+    fontWeight: 'bold',
   },
   searchinput: {
     backgroundColor: 'white',
@@ -51,12 +52,7 @@ export default styles = StyleSheet.create({
     height: 25,
     width: 25,
   },
-  backIcon: {
-    height: 22,
-    width: 22,
-    tintColor: 'white',
-  },
-  edittxt: {color: 'green', fontSize: 20, fontWeight: 'bold'},
+
   checkicon: {tintColor: 'green', height: 25, width: 25},
   iconview: {
     flexDirection: 'row',
@@ -64,22 +60,7 @@ export default styles = StyleSheet.create({
     alignItems: 'center',
     marginTop: 10,
   },
-  notedataTxt: {
-    borderWidth: 0.5,
-    marginHorizontal: 20,
-    padding: 10,
-    color: 'lightgray',
-    borderColor: 'white',
-    marginBottom: 10,
-    fontSize: 15,
-  },
-  noteDataTitle: {
-    color: 'white',
-    fontWeight: 'bold',
-    fontSize: 18,
-    marginTop: 20,
-    marginLeft: 20,
-  },
+
   complateView: {
     flexDirection: 'row',
     alignItems: 'center',
@@ -92,9 +73,5 @@ export default styles = StyleSheet.create({
     fontSize: 12,
     color: 'green',
     fontWeight: 'bold',
-  },
-  modalView: {
-    flex: 1,
-    backgroundColor: 'black',
   },
 });

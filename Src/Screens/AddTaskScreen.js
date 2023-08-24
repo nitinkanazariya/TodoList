@@ -73,7 +73,7 @@ const AddTaskScreen = props => {
   return (
     <View style={styles.container}>
       <ScrollView>
-        <Text style={styles.createNoteText}>Create Note</Text>
+        <Text style={styles.createNoteText}>Note</Text>
 
         <TextInput
           placeholder="Enter title"

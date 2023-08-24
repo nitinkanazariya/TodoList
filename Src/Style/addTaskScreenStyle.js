@@ -7,6 +7,7 @@ export default styles = StyleSheet.create({
     fontSize: 20,
     color: 'white',
     marginTop: 40,
+    fontWeight: 'bold',
   },
   addNoteTextInput: {
     backgroundColor: 'white',

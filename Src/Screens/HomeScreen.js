@@ -18,8 +18,6 @@ const HomeScreen = props => {
   const [selact, setSelact] = useState([]);
   const [data, setData] = useState([]);
   const [searchData, setSearchData] = useState([]);
-  const [show, setShow] = useState(false);
-  const [itemdata, setItemData] = useState([]);
 
   useFocusEffect(
     React.useCallback(() => {
@@ -83,7 +81,7 @@ const HomeScreen = props => {
               <TouchableOpacity
                 style={styles.listView}
                 onPress={() => {
-                  setItemData(item), setShow(true);
+                  props.navigation.navigate('AddTask', item);
                 }}>
                 <TouchableOpacity
                   onPress={() => check(item.id)}
@@ -120,37 +118,6 @@ const HomeScreen = props => {
                     />
                   </TouchableOpacity>
                 </View>
-
-                <Modal visible={show} transparent={false}>
-                  <View style={styles.modalView}>
-                    <View
-                      style={[
-                        styles.iconview,
-                        {marginHorizontal: 20, marginTop: 20},
-                      ]}>
-                      <TouchableOpacity onPress={() => setShow(false)}>
-                        <Image
-                          style={styles.backIcon}
-                          source={require('../image/back.png')}
-                        />
-                      </TouchableOpacity>
-                      <TouchableOpacity
-                        onPress={() => {
-                          props.navigation.navigate('AddTask', item);
-                          setShow(false);
-                        }}>
-                        <Text style={styles.edittxt}>Edit</Text>
-                      </TouchableOpacity>
-                    </View>
-
-                    <Text style={styles.noteDataTitle}>Title</Text>
-                    <Text style={styles.notedataTxt}>{itemdata.title}</Text>
-                    <Text style={styles.noteDataTitle}>Note</Text>
-                    <Text style={[styles.notedataTxt, {flex: 1}]}>
-                      {itemdata.note}
-                    </Text>
-                  </View>
-                </Modal>
               </TouchableOpacity>
             );
           }}
