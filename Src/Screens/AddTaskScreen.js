@@ -1,47 +1,68 @@
-import AsyncStorage from '@react-native-async-storage/async-storage';
-import {useFocusEffect} from '@react-navigation/native';
-import React, {useState} from 'react';
-import styles from '../Style/addTaskScreenStyle';
-
+import React, {useEffect, useState} from 'react';
 import {
-  ScrollView,
-  Text,
   View,
+  Text,
   TextInput,
   TouchableOpacity,
+  ScrollView,
   Alert,
 } from 'react-native';
+import styles from '../Style/addTaskScreenStyle';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const AddTaskScreen = props => {
   const [title, setTitle] = useState('');
   const [note, setNote] = useState('');
-  useFocusEffect(
-    React.useCallback(() => {
-      loadTasks();
-    }),
-  );
+  const [editableData, setEditableData] = useState('');
+
+  useEffect(() => {
+    loadTasks();
+    setEditableData(props.route.params);
+    setTitle(editableData?.title);
+    setNote(editableData?.note);
+  }, [editableData]);
 
   const loadTasks = async () => {
     await AsyncStorage.getItem('tasks');
   };
+
   const SaveTask = async () => {
     const storedTasks = await AsyncStorage.getItem('tasks');
     let noteData = storedTasks ? JSON.parse(storedTasks) : [];
 
-    let Data = {
-      id: new Date().getTime().toString(),
-      title: title,
-      note: note,
-      Date: new Date().toLocaleDateString(),
-      Time: new Date().toLocaleTimeString([], {
-        hour: '2-digit',
-        minute: '2-digit',
-        hour12: true,
-      }),
-    };
-    noteData.push(Data);
+    if (editableData) {
+      const updatedData = {
+        id: editableData.id,
+        title: title,
+        note: note,
+        Date: new Date().toLocaleDateString(),
+        Time: new Date().toLocaleTimeString([], {
+          hour: '2-digit',
+          minute: '2-digit',
+          hour12: true,
+        }),
+      };
 
-    if (title !== '' && note !== '') {
+      const dataIndex = noteData.findIndex(item => item.id === editableData.id);
+      if (dataIndex !== -1) {
+        noteData[dataIndex] = updatedData;
+      }
+    } else {
+      const newData = {
+        id: new Date().getTime().toString(),
+        title: title,
+        note: note,
+        Date: new Date().toLocaleDateString(),
+        Time: new Date().toLocaleTimeString([], {
+          hour: '2-digit',
+          minute: '2-digit',
+          hour12: true,
+        }),
+      };
+      noteData.push(newData);
+    }
+
+    if (!title == '' && !note == '') {
       props.navigation.navigate('Home');
       await AsyncStorage.setItem('tasks', JSON.stringify(noteData));
     } else {
@@ -55,14 +76,14 @@ const AddTaskScreen = props => {
         <Text style={styles.createNoteText}>Create Note</Text>
 
         <TextInput
-          placeholder="Enter Titel"
+          placeholder="Enter title"
           onChangeText={res => setTitle(res)}
           value={title}
           style={styles.addNoteTextInput}
         />
 
         <TextInput
-          placeholder="Enter Task"
+          placeholder="Enter note"
           onChangeText={res => setNote(res)}
           value={note}
           multiline
@@ -81,5 +102,4 @@ const AddTaskScreen = props => {
     </View>
   );
 };
-
 export default AddTaskScreen;

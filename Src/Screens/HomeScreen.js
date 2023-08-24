@@ -10,6 +10,7 @@ import {
   TouchableOpacity,
   FlatList,
   StatusBar,
+  Modal,
 } from 'react-native';
 import {useFocusEffect} from '@react-navigation/native';
 const HomeScreen = props => {
@@ -17,6 +18,8 @@ const HomeScreen = props => {
   const [selact, setSelact] = useState([]);
   const [data, setData] = useState([]);
   const [searchData, setSearchData] = useState([]);
+  const [show, setShow] = useState(false);
+  const [itemdata, setItemData] = useState([]);
 
   useFocusEffect(
     React.useCallback(() => {
@@ -77,7 +80,11 @@ const HomeScreen = props => {
           style={styles.FlatList}
           renderItem={({item, index}) => {
             return (
-              <View style={styles.listView}>
+              <TouchableOpacity
+                style={styles.listView}
+                onPress={() => {
+                  setItemData(item), setShow(true);
+                }}>
                 <Text style={styles.timetext}>
                   {item.Date + '  '}
                   {item.Time}
@@ -104,14 +111,25 @@ const HomeScreen = props => {
                     />
                     {selact.includes(item.id) ? <Text>Complet Task</Text> : ''}
                   </TouchableOpacity>
-                  <TouchableOpacity onPress={() => removeTask(item.id)}>
+                  <TouchableOpacity
+                    onPress={() => props.navigation.navigate('AddTask', item)}>
                     <Image
                       style={styles.removeicon}
                       source={require('../image/delete.png')}
                     />
                   </TouchableOpacity>
                 </View>
-              </View>
+                <Modal visible={show} transparent={false}>
+                  <View
+                    style={{
+                      justifyContent: 'center',
+                      flex: 1,
+                      alignItems: 'center',
+                    }}>
+                    <Text onPress={() => setShow(false)}>{itemdata.title}</Text>
+                  </View>
+                </Modal>
+              </TouchableOpacity>
             );
           }}
           data={search == '' ? data : searchData}
