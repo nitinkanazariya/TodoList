@@ -85,48 +85,70 @@ const HomeScreen = props => {
                 onPress={() => {
                   setItemData(item), setShow(true);
                 }}>
-                <Text style={styles.timetext}>
-                  {item.Date + '  '}
-                  {item.Time}
-                </Text>
+                <TouchableOpacity
+                  onPress={() => check(item.id)}
+                  style={styles.complateView}>
+                  {selact.includes(item.id) ? (
+                    <Text style={styles.complateTxt}>Complet Task</Text>
+                  ) : null}
+                  <Image
+                    style={[
+                      styles.checkicon,
+                      {
+                        tintColor: selact.includes(item.id)
+                          ? 'green'
+                          : 'lightgray',
+                      },
+                    ]}
+                    source={require('../image/check.png')}
+                  />
+                </TouchableOpacity>
                 <Text style={styles.titleText}>
                   {index + 1 + '] '}
                   {item.title}
                 </Text>
-                <Text style={styles.notetext}>{item.note}</Text>
                 <View style={styles.iconview}>
-                  <TouchableOpacity
-                    onPress={() => check(item.id)}
-                    style={{flexDirection: 'row', alignItems: 'center'}}>
-                    <Image
-                      style={[
-                        styles.checkicon,
-                        {
-                          tintColor: selact.includes(item.id)
-                            ? 'green'
-                            : 'lightgray',
-                        },
-                      ]}
-                      source={require('../image/check.png')}
-                    />
-                    {selact.includes(item.id) ? <Text>Complet Task</Text> : ''}
-                  </TouchableOpacity>
-                  <TouchableOpacity
-                    onPress={() => props.navigation.navigate('AddTask', item)}>
+                  <Text style={styles.timetext}>
+                    {item.Date + '  '}
+                    {item.Time}
+                  </Text>
+
+                  <TouchableOpacity onPress={() => removeTask(item.id)}>
                     <Image
                       style={styles.removeicon}
                       source={require('../image/delete.png')}
                     />
                   </TouchableOpacity>
                 </View>
+
                 <Modal visible={show} transparent={false}>
-                  <View
-                    style={{
-                      justifyContent: 'center',
-                      flex: 1,
-                      alignItems: 'center',
-                    }}>
-                    <Text onPress={() => setShow(false)}>{itemdata.title}</Text>
+                  <View style={styles.modalView}>
+                    <View
+                      style={[
+                        styles.iconview,
+                        {marginHorizontal: 20, marginTop: 20},
+                      ]}>
+                      <TouchableOpacity onPress={() => setShow(false)}>
+                        <Image
+                          style={styles.backIcon}
+                          source={require('../image/back.png')}
+                        />
+                      </TouchableOpacity>
+                      <TouchableOpacity
+                        onPress={() => {
+                          props.navigation.navigate('AddTask', item);
+                          setShow(false);
+                        }}>
+                        <Text style={styles.edittxt}>Edit</Text>
+                      </TouchableOpacity>
+                    </View>
+
+                    <Text style={styles.noteDataTitle}>Title</Text>
+                    <Text style={styles.notedataTxt}>{itemdata.title}</Text>
+                    <Text style={styles.noteDataTitle}>Note</Text>
+                    <Text style={[styles.notedataTxt, {flex: 1}]}>
+                      {itemdata.note}
+                    </Text>
                   </View>
                 </Modal>
               </TouchableOpacity>

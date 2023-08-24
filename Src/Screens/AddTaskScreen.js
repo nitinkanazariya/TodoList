@@ -88,7 +88,7 @@ const AddTaskScreen = props => {
           value={note}
           multiline
           numberOfLines={5}
-          style={styles.addNoteTextInput}
+          style={[styles.addNoteTextInput, {flex: 1}]}
         />
 
         <TouchableOpacity

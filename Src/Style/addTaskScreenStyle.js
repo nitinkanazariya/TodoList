@@ -11,14 +11,13 @@ export default styles = StyleSheet.create({
   addNoteTextInput: {
     backgroundColor: 'white',
     borderWidth: 1,
-    borderRadius: 15,
-    marginTop: 50,
+    marginTop: 20,
     color: 'black',
     fontSize: 16,
     paddingLeft: 10,
   },
   onSave: {
-    marginTop: '30%',
+    marginTop: '20%',
     backgroundColor: '#03966d',
     alignSelf: 'center',
     padding: 10,
