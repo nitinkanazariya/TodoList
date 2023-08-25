@@ -7,8 +7,8 @@ export default styles = StyleSheet.create({
     fontSize: 18,
     textAlign: 'center',
     backgroundColor: 'black',
-    marginTop: 40,
-    marginBottom: 30,
+    marginTop: 30,
+    marginBottom: 20,
     fontWeight: 'bold',
   },
   searchinput: {
