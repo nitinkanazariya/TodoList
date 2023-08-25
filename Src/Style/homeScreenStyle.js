@@ -19,7 +19,7 @@ export default styles = StyleSheet.create({
     paddingLeft: 10,
     color: 'black',
   },
-  FlatList: {marginTop: 10, marginBottom: '35%'},
+  FlatList: {marginTop: 10},
   addNote: {position: 'absolute', bottom: '10%', right: '12%'},
   addNoteIcon: {
     height: 50,

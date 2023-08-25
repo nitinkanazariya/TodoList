@@ -11,6 +11,7 @@ import {
   FlatList,
   StatusBar,
   Modal,
+  ScrollView,
 } from 'react-native';
 import {useFocusEffect} from '@react-navigation/native';
 const HomeScreen = props => {
@@ -64,67 +65,69 @@ const HomeScreen = props => {
   return (
     <View style={styles.container}>
       <StatusBar backgroundColor={'black'} barStyle={'light-content'} />
+      <ScrollView>
+        <Text style={styles.noteApp}>NOTE APP</Text>
 
-      <Text style={styles.noteApp}>NOTE APP</Text>
-      <View style={{padding: 10}}>
-        <TextInput
-          placeholder="Search here"
-          value={search}
-          onChangeText={searchFilterFunction}
-          style={styles.searchinput}
-        />
+        <View style={{padding: 10}}>
+          <TextInput
+            placeholder="Search here"
+            value={search}
+            onChangeText={searchFilterFunction}
+            style={styles.searchinput}
+          />
 
-        <FlatList
-          style={styles.FlatList}
-          renderItem={({item, index}) => {
-            return (
-              <TouchableOpacity
-                style={styles.listView}
-                onPress={() => {
-                  props.navigation.navigate('AddTask', item);
-                }}>
+          <FlatList
+            style={styles.FlatList}
+            renderItem={({item, index}) => {
+              return (
                 <TouchableOpacity
-                  onPress={() => check(item.id)}
-                  style={styles.complateView}>
-                  {selact.includes(item.id) ? (
-                    <Text style={styles.complateTxt}>Complet Task</Text>
-                  ) : null}
-                  <Image
-                    style={[
-                      styles.checkicon,
-                      {
-                        tintColor: selact.includes(item.id)
-                          ? 'green'
-                          : 'lightgray',
-                      },
-                    ]}
-                    source={require('../image/check.png')}
-                  />
-                </TouchableOpacity>
-                <Text style={styles.titleText}>
-                  {index + 1 + '] '}
-                  {item.title}
-                </Text>
-                <View style={styles.iconview}>
-                  <Text style={styles.timetext}>
-                    {item.Date + '  '}
-                    {item.Time}
-                  </Text>
-
-                  <TouchableOpacity onPress={() => removeTask(item.id)}>
+                  style={styles.listView}
+                  onPress={() => {
+                    props.navigation.navigate('AddTask', item);
+                  }}>
+                  <TouchableOpacity
+                    onPress={() => check(item.id)}
+                    style={styles.complateView}>
+                    {selact.includes(item.id) ? (
+                      <Text style={styles.complateTxt}>Complet Task</Text>
+                    ) : null}
                     <Image
-                      style={styles.removeicon}
-                      source={require('../image/delete.png')}
+                      style={[
+                        styles.checkicon,
+                        {
+                          tintColor: selact.includes(item.id)
+                            ? 'green'
+                            : 'lightgray',
+                        },
+                      ]}
+                      source={require('../image/check.png')}
                     />
                   </TouchableOpacity>
-                </View>
-              </TouchableOpacity>
-            );
-          }}
-          data={search == '' ? data : searchData}
-          keyExtractor={(item, index) => index.toString()}
-        />
-      </View>
+                  <Text style={styles.titleText}>
+                    {index + 1 + '] '}
+                    {item.title}
+                  </Text>
+                  <View style={styles.iconview}>
+                    <Text style={styles.timetext}>
+                      {item.Date + '  '}
+                      {item.Time}
+                    </Text>
+
+                    <TouchableOpacity onPress={() => removeTask(item.id)}>
+                      <Image
+                        style={styles.removeicon}
+                        source={require('../image/delete.png')}
+                      />
+                    </TouchableOpacity>
+                  </View>
+                </TouchableOpacity>
+              );
+            }}
+            data={search == '' ? data : searchData}
+            keyExtractor={(item, index) => index.toString()}
+          />
+        </View>
+      </ScrollView>
       <TouchableOpacity
         onPress={() => {
           props.navigation.navigate('AddTask');
