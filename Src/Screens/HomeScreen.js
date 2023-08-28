@@ -26,6 +26,7 @@ const HomeScreen = props => {
       loadTasks();
     }, []),
   );
+
   const loadTasks = async () => {
     const savedTasks = await AsyncStorage.getItem('tasks');
     setData(JSON.parse(savedTasks));
@@ -36,6 +37,7 @@ const HomeScreen = props => {
       setSelact(JSON.parse(selected));
     }
   };
+
   const check = async itemId => {
     if (selact.includes(itemId)) {
       setSelact(selact.filter(id => id !== itemId));
@@ -78,10 +80,23 @@ const HomeScreen = props => {
 
           <FlatList
             style={styles.FlatList}
+            numColumns={2}
             renderItem={({item, index}) => {
               return (
                 <TouchableOpacity
-                  style={styles.listView}
+                  style={[
+                    styles.listView,
+                    {
+                      backgroundColor:
+                        index % 3 == 0
+                          ? '#edf5a4'
+                          : index % 2.5 == 0
+                          ? '#fcd2e3'
+                          : index % 4 == 0
+                          ? 'white'
+                          : '#d2f5fc',
+                    },
+                  ]}
                   onPress={() => {
                     props.navigation.navigate('AddTask', item);
                   }}>
@@ -97,7 +112,7 @@ const HomeScreen = props => {
                         {
                           tintColor: selact.includes(item.id)
                             ? 'green'
-                            : 'lightgray',
+                            : 'gray',
                         },
                       ]}
                       source={require('../image/check.png')}
@@ -109,8 +124,8 @@ const HomeScreen = props => {
                   </Text>
                   <View style={styles.iconview}>
                     <Text style={styles.timetext}>
-                      {item.Date + '  '}
-                      {item.Time}
+                      {item.Time + '  '}
+                      {item.Date}
                     </Text>
 
                     <TouchableOpacity onPress={() => removeTask(item.id)}>

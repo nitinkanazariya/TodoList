@@ -20,20 +20,26 @@ export default styles = StyleSheet.create({
     color: 'black',
   },
   FlatList: {marginTop: 10},
-  addNote: {position: 'absolute', bottom: '10%', right: '12%'},
+  addNote: {
+    position: 'absolute',
+    bottom: '10%',
+    right: '12%',
+    backgroundColor: 'black',
+    padding: 10,
+    borderRadius: 30,
+  },
   addNoteIcon: {
-    height: 50,
-    width: 50,
+    height: 30,
+    width: 30,
+    tintColor: 'white',
   },
 
   listView: {
-    padding: 15,
-    flex: 1,
-    marginHorizontal: 10,
-    borderRadius: 15,
+    padding: 20,
+    flex: 0.5,
+    marginHorizontal: 5,
+    borderRadius: 10,
     marginTop: 10,
-
-    backgroundColor: 'white',
   },
   titleText: {
     color: 'black',
@@ -49,11 +55,11 @@ export default styles = StyleSheet.create({
   },
   notetext: {color: 'gray', fontWeight: 'bold', fontSize: 14},
   removeicon: {
-    height: 25,
-    width: 25,
+    height: 22,
+    width: 22,
   },
 
-  checkicon: {tintColor: 'green', height: 25, width: 25},
+  checkicon: {tintColor: 'green', height: 20, width: 20},
   iconview: {
     flexDirection: 'row',
     justifyContent: 'space-between',
