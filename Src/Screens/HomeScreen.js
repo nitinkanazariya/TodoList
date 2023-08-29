@@ -19,7 +19,6 @@ const HomeScreen = props => {
   const [selact, setSelact] = useState([]);
   const [data, setData] = useState([]);
   const [searchData, setSearchData] = useState([]);
-
   useFocusEffect(
     React.useCallback(() => {
       loadSavedSelection();
@@ -81,13 +80,15 @@ const HomeScreen = props => {
             onChangeText={searchFilterFunction}
             style={styles.searchinput}
           />
-          <Text
-            style={styles.clearAll}
-            onPress={() => {
-              clearAll();
-            }}>
-            Clear all note
-          </Text>
+          {data ? (
+            <Text
+              style={styles.clearAll}
+              onPress={() => {
+                clearAll();
+              }}>
+              Clear all note
+            </Text>
+          ) : null}
           <FlatList
             style={styles.FlatList}
             numColumns={2}
