@@ -79,7 +79,7 @@ const AddTaskScreen = props => {
           placeholder="Enter title"
           onChangeText={res => setTitle(res)}
           value={title}
-          style={styles.addNoteTextInput}
+          style={[styles.addNoteTextInput, {fontWeight: 'bold'}]}
         />
 
         <TextInput
@@ -87,8 +87,11 @@ const AddTaskScreen = props => {
           onChangeText={res => setNote(res)}
           value={note}
           multiline
-          numberOfLines={5}
-          style={[styles.addNoteTextInput, {flex: 1}]}
+          numberOfLines={10}
+          style={[
+            styles.addNoteTextInput,
+            {textAlignVertical: 'top', fontSize: 18},
+          ]}
         />
 
         <TouchableOpacity

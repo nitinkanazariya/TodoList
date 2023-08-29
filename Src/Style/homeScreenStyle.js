@@ -20,11 +20,24 @@ export default styles = StyleSheet.create({
     color: 'black',
   },
   FlatList: {marginTop: 10},
+  clearAll: {
+    color: 'white',
+    alignSelf: 'flex-end',
+    padding: 5,
+    fontSize: 16,
+    borderRadius: 15,
+    marginTop: 15,
+    borderWidth: 1,
+    borderColor: 'white',
+  },
   addNote: {
     position: 'absolute',
     bottom: '10%',
     right: '12%',
-    backgroundColor: 'black',
+
+    elevation: 5,
+    color: 'black',
+    backgroundColor: 'darkgreen',
     padding: 10,
     borderRadius: 30,
   },
@@ -35,7 +48,7 @@ export default styles = StyleSheet.create({
   },
 
   listView: {
-    padding: 20,
+    padding: 15,
     flex: 0.5,
     marginHorizontal: 5,
     borderRadius: 10,
@@ -45,7 +58,7 @@ export default styles = StyleSheet.create({
     color: 'black',
     fontWeight: 'bold',
     fontSize: 16,
-    marginLeft: -10,
+    marginLeft: -5,
   },
   timetext: {
     color: 'gray',
@@ -65,6 +78,7 @@ export default styles = StyleSheet.create({
     justifyContent: 'space-between',
     alignItems: 'center',
     marginTop: 10,
+    padding: 10,
   },
 
   complateView: {

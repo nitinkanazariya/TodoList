@@ -46,6 +46,10 @@ const HomeScreen = props => {
     }
   };
 
+  const clearAll = async () => {
+    const clearAll = await AsyncStorage.clear();
+    setData(clearAll);
+  };
   const removeTask = async id => {
     const updatedTasks = data.filter(task => task.id !== id);
     await AsyncStorage.setItem('tasks', JSON.stringify(updatedTasks));
@@ -77,7 +81,13 @@ const HomeScreen = props => {
             onChangeText={searchFilterFunction}
             style={styles.searchinput}
           />
-
+          <Text
+            style={styles.clearAll}
+            onPress={() => {
+              clearAll();
+            }}>
+            Clear all note
+          </Text>
           <FlatList
             style={styles.FlatList}
             numColumns={2}
@@ -122,6 +132,7 @@ const HomeScreen = props => {
                     {index + 1 + '] '}
                     {item.title}
                   </Text>
+
                   <View style={styles.iconview}>
                     <Text style={styles.timetext}>
                       {item.Time + '  '}

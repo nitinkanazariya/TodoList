@@ -14,7 +14,7 @@ export default styles = StyleSheet.create({
     borderWidth: 1,
     marginTop: 20,
     color: 'black',
-    fontSize: 16,
+    fontSize: 18,
     paddingLeft: 10,
   },
   onSave: {
